@@ -135,6 +135,10 @@
         max-height: 400px;
         object-fit: cover;
     }
+    .retry-button {
+        display: none;
+        margin: 10px 0;
+    }
     @media (max-width: 768px) {
         .container {
             flex-direction: column;
@@ -225,8 +229,8 @@
     }
     </style>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyA_8I3TTKFl-5KYnhk4K_OrzqzzymzmhqU",
@@ -241,68 +245,152 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // دالة مساعدة لإعادة المحاولة
+        async function retryOperation(operation, maxAttempts = 3, delay = 1000) {
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                try {
+                    return await operation();
+                } catch (error) {
+                    if (attempt === maxAttempts) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
         async function loadTexts() {
             const textContainer = document.getElementById("textContainer");
-            textContainer.innerHTML = '<p>جار التحميل...</p>';
-            
-            const querySnapshot = await getDocs(collection(db, "texts"));
-            let textHTML = '';
-            
-            querySnapshot.forEach((doc) => {
-                const textData = doc.data();
-                textHTML += `<p class="txt">${textData.text}</p><br>`;
-            });
+            const retryButton = document.createElement("button");
+            retryButton.className = "retry-button";
+            retryButton.textContent = "إعادة المحاولة";
+            textContainer.parentElement.appendChild(retryButton);
 
-            textContainer.innerHTML = textHTML + textHTML || '<p>لم يتم العثور على نصوص</p>';
+            retryButton.addEventListener("click", () => loadTexts());
+
+            const load = async () => {
+                textContainer.innerHTML = '<p>جار التحميل...</p>';
+                retryButton.style.display = "none";
+
+                try {
+                    const querySnapshot = await getDocs(collection(db, "texts"));
+                    let textHTML = '';
+
+                    if (querySnapshot.empty) {
+                        textContainer.innerHTML = '<p>لا توجد نصوص متاحة حاليًا</p>';
+                        return;
+                    }
+
+                    querySnapshot.forEach((doc) => {
+                        const textData = doc.data();
+                        textHTML += `<p class="txt">${textData.text}</p><br>`;
+                    });
+
+                    textContainer.innerHTML = textHTML + textHTML;
+                } catch (error) {
+                    console.error("Error loading texts:", error);
+                    textContainer.innerHTML = '<p>حدث خطأ أثناء تحميل النصوص</p>';
+                    retryButton.style.display = "block";
+                }
+            };
+
+            await retryOperation(load);
         }
 
         async function loadSpecialties() {
             const photoContainer = document.getElementById("photoContainer");
-            photoContainer.innerHTML = '<p>جار التحميل...</p>';
-            
-            const querySnapshot = await getDocs(collection(db, "image"));
-            let photoHTML = '';
-            
-            querySnapshot.forEach((doc) => {
-                const photo = doc.data();
-                photoHTML += `
-                    <div 
-                        data-id="${doc.id}"
-                        data-name="${photo.title}"
-                        data-image="${photo.source}">
-                        <img src="${photo.source}" alt="${photo.title}">
-                        <p>${photo.title}</p>
-                    </div>
-                `;
-            });
+            const retryButton = document.createElement("button");
+            retryButton.className = "retry-button";
+            retryButton.textContent = "إعادة المحاولة";
+            photoContainer.parentElement.appendChild(retryButton);
 
-            photoContainer.innerHTML = photoHTML || '<p>لم يتم العثور على صور</p>';
+            retryButton.addEventListener("click", () => loadSpecialties());
+
+            const load = async () => {
+                photoContainer.innerHTML = '<p>جار التحميل...</p>';
+                retryButton.style.display = "none";
+
+                try {
+                    const querySnapshot = await getDocs(collection(db, "image"));
+                    let photoHTML = '';
+
+                    if (querySnapshot.empty) {
+                        photoContainer.innerHTML = '<p>لا توجد صور متاحة حاليًا</p>';
+                        return;
+                    }
+
+                    querySnapshot.forEach((doc) => {
+                        const photo = doc.data();
+                        photoHTML += `
+                            <div 
+                                data-id="${doc.id}"
+                                data-name="${photo.title}"
+                                data-image="${photo.source}">
+                                <img src="${photo.source}" alt="${photo.title}">
+                                <p>${photo.title}</p>
+                            </div>
+                        `;
+                    });
+
+                    photoContainer.innerHTML = photoHTML;
+                } catch (error) {
+                    console.error("Error loading images:", error);
+                    photoContainer.innerHTML = '<p>حدث خطأ أثناء تحميل الصور</p>';
+                    retryButton.style.display = "block";
+                }
+            };
+
+            await retryOperation(load);
         }
 
         async function loadarticle() {
             const articleContainer = document.getElementById("articleContainer");
-            articleContainer.innerHTML = '<p>جار التحميل...</p>';
-            const querySnapshot = await getDocs(collection(db, "article"));
-            let articleHTML = '';
-            
-            querySnapshot.forEach((doc) => {
-                const article = doc.data();
-                articleHTML += `
-                    <div class="item" onclick="window.location.href='article.html?id=${doc.id}'">
-                        <h4>${article.title}</h4>
-                        <p>${article.ex}</p>
-                        <h4>${article.authour}</h4>
-                    </div>
-                `;
-            });
+            const retryButton = document.createElement("button");
+            retryButton.className = "retry-button";
+            retryButton.textContent = "إعادة المحاولة";
+            articleContainer.parentElement.appendChild(retryButton);
 
-            articleContainer.innerHTML = articleHTML || '<p>لم يتم العثور على مقالات</p>';
+            retryButton.addEventListener("click", () => loadarticle());
+
+            const load = async () => {
+                articleContainer.innerHTML = '<p>جار التحميل...</p>';
+                retryButton.style.display = "none";
+
+                try {
+                    const querySnapshot = await getDocs(collection(db, "article"));
+                    let articleHTML = '';
+
+                    if (querySnapshot.empty) {
+                        articleContainer.innerHTML = '<p>لا توجد مقالات متاحة حاليًا</p>';
+                        return;
+                    }
+
+                    querySnapshot.forEach((doc) => {
+                        const article = doc.data();
+                        articleHTML += `
+                            <div class="item" onclick="window.location.href='article.html?id=${doc.id}'">
+                                <h4>${article.title}</h4>
+                                <p>${article.ex}</p>
+                                <h4>${article.authour}</h4>
+                            </div>
+                        `;
+                    });
+
+                    articleContainer.innerHTML = articleHTML;
+                } catch (error) {
+                    console.error("Error loading articles:", error);
+                    articleContainer.innerHTML = '<p>حدث خطأ أثناء تحميل المقالات</p>';
+                    retryButton.style.display = "block";
+                }
+            };
+
+            await retryOperation(load);
         }
 
-        window.onload = function() {
-            loadTexts();
-            loadSpecialties();
-            loadarticle();
+        window.onload = async function() {
+            try {
+                await Promise.all([loadTexts(), loadSpecialties(), loadarticle()]);
+            } catch (error) {
+                console.error("Error loading data:", error);
+            }
         };
 
         document.getElementById('contactForm').addEventListener('submit', function(e) {
@@ -355,7 +443,7 @@
                 <h2>قسم المقالات</h2>
                 <div id="articleContainer"></div>
             </div>
-            <div class="content" id="qa">
+           <div class="content" id="qa">
                 <h2>قسم الأسئلة والأجوبة</h2>
                 <p>محتوى الأسئلة والأجوبة هنا</p>
             </div>
