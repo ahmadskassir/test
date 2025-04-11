@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Tajawal&display=swap" rel="stylesheet"></link>
+    <link href="https://fonts.googleapis.com/css?family=Tajawal&display=swap" rel="stylesheet">
     <title>اسرار آل محمد ع</title>
     <style>
     body {
@@ -14,16 +12,25 @@
         direction: rtl;
     }
     .item {
-        width: 150px;
-        height: 150px;
-        object-fit: contain;
+        width: 250px;
+        height: auto;
+        padding: 10px;
         border: 2px solid #007e5f;
         margin: 4px;
-        color:white;
-        background: #00ab81; 
-        }
+        color: white;
+        background: #00ab81;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .item h4 {
+        margin: 5px 0;
+    }
+    .item p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
     .header { 
-        font-size:15px; 
+        font-size: 15px; 
         display: flex; 
         align-items: center; 
         padding: 15px;
@@ -32,16 +39,14 @@
         color: white; 
     } 
     .title { 
-        color:white;
+        color: white;
         margin: 0;
         font-size: 1.2em;
     }
     .container {
-        
         display: flex;
         flex-direction: row;
     }
-
     .sidebar {
         width: 200px;
         background-color: #f0f0f0;
@@ -49,38 +54,32 @@
         position: relative;
         flex-shrink: 0;
     }
-
     .text-container {
         position: absolute;
         top: 0;
         width: 200px;
         animation: scroll-text 29s linear infinite;
     }
-
     .text-container p {
         margin: 0;
         padding: 10px;
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
-
     @keyframes scroll-text {
         0% { transform: translateY(0); }
         100% { transform: translateY(-50%); }
     }
-
     .main-content {
         flex: 1;
         padding: 20px;
         overflow-y: auto;
     }
-
     .buttons {
         margin-bottom: 20px;
         display: flex;
         gap: 10px;
     }
-
     button {
         padding: 10px 20px;
         cursor: pointer;
@@ -90,36 +89,38 @@
         border-radius: 5px;
         flex: 1;
     }
-
     button:hover {
         background-color: #005742;
     }
-        .nav {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.25rem;
-            background-color: #acb200;
-color: white;
-        }
-
-        .nav a {
-            
-            color: white;
-            text-decoration: none;
-        }
+    .nav {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.25rem;
+        background-color: #acb200;
+        color: white;
+    }
+    .nav a {
+        color: white;
+        text-decoration: none;
+    }
     .content {
         border: 1px solid #007e5f;
         padding: 15px;
         margin-bottom: 20px;
     }
-
     #photoContainer {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 10px;
     }
-
+    #articleContainer {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        padding: 10px;
+    }
     video {
         width: 100%;
         max-width: 400px;
@@ -128,50 +129,41 @@ color: white;
         object-fit: contain;
         margin-bottom: 10px;
     }
-
     img {
         width: 100%;
         height: auto;
         max-height: 400px;
         object-fit: cover;
     }
-
     @media (max-width: 768px) {
         .container {
             flex-direction: column;
             height: auto;
         }
-        
         .sidebar {
             width: 100%;
             height: 200px;
             flex-shrink: 0;
         }
-        
         .text-container {
             width: 100%;
         }
-        
         .main-content {
             padding: 15px;
             overflow: visible;
         }
-        
         .buttons {
             flex-direction: column;
-        }'
+        }
         .nav {
             display: flex;
             justify-content: center;
             gap: 0.5rem;
             padding: 0.25rem;
-color: white;
+            color: white;
             background-color: #acb200;
- 
         }
-
         .nav a {
-            
             color: white;
             text-decoration: none;
         }
@@ -179,41 +171,38 @@ color: white;
             width: 100%;
             margin: 5px 0;
         }
-        
         #photoContainer {
             grid-template-columns: 1fr;
         }
-        
+        #articleContainer {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
         .header {
             padding: 10px;
         }
-        
         .title {
             font-size: 1em;
         }
     }
-   .contact-section {
+    .contact-section {
         padding: 20px;
         background-color: #f5f5f5;
-        border-top: 2px solid #007e5f;;
+        border-top: 2px solid #007e5f;
         direction: rtl;
     }
-    
     .contact-form {
         max-width: 600px;
         margin: 0 auto;
     }
-    
     .form-group {
         margin-bottom: 15px;
     }
-    
     .form-group label {
         display: block;
         margin-bottom: 5px;
         font-weight: bold;
     }
-    
     .form-group input,
     .form-group textarea,
     .form-group file {
@@ -222,23 +211,19 @@ color: white;
         border: 1px solid #ccc;
         border-radius: 4px;
     }
-    
     .form-group textarea {
         height: 100px;
     }
-    
     @media (max-width: 768px) {
         .contact-section {
             padding: 15px;
         }
-        
         .form-group input,
         .form-group textarea {
             font-size: 14px;
         }
     }
     </style>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -294,7 +279,6 @@ color: white;
             photoContainer.innerHTML = photoHTML || '<p>لم يتم العثور على صور</p>';
         }
 
-
         async function loadarticle() {
             const articleContainer = document.getElementById("articleContainer");
             articleContainer.innerHTML = '<p>جار التحميل...</p>';
@@ -304,20 +288,15 @@ color: white;
             querySnapshot.forEach((doc) => {
                 const article = doc.data();
                 articleHTML += `
-                    <div 
-                        data-id="${doc.id}"
-                        data-name="${article.title}"
-                        data-ex="${article.ex}"
-                        data-authour="${article.authour}">
-                <div class="item">
-                <h4>${article.title}</h4>
-                <p>${article.ex}</p>
-                <h4>${article.authour}</h4>
-                </div>
+                    <div class="item" onclick="window.location.href='article.html?id=${doc.id}'">
+                        <h4>${article.title}</h4>
+                        <p>${article.ex}</p>
+                        <h4>${article.authour}</h4>
+                    </div>
                 `;
             });
 
-            articleContainer.innerHTML = articleHTML || '<p> لم يتم العثور على مقالات</p>';
+            articleContainer.innerHTML = articleHTML || '<p>لم يتم العثور على مقالات</p>';
         }
 
         window.onload = function() {
@@ -325,9 +304,9 @@ color: white;
             loadSpecialties();
             loadarticle();
         };
+
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const formData = new FormData(this);
             
             fetch('https://formspree.io/f/xdkepole', {
@@ -352,22 +331,18 @@ color: white;
         });
     </script>
 </head>
-
 <body>
     <header class="header">
         <h1>اسرار آل محمد عليهم السلام</h1>
-        <p>&nbsp; &nbsp;بوابة التواصل بين الحوزة العلمية والمجتمع</p>
+        <p>بوابة التواصل بين الحوزة العلمية والمجتمع</p>
     </header>
-
     <nav class="nav">
         <a href="#articles"> المقالات</a>
-       <a href="#qa"> الأسئلة</a>
+        <a href="#qa"> الأسئلة</a>
         <a href="#hadith"> الأحاديث</a>
         <a href="#doaa"> الادعية </a>
- 
     </nav>
-
-   <div class="container">
+    <div class="container">
         <div class="sidebar">
             <div class="text-container" id="textContainer"></div>
         </div>
@@ -376,14 +351,10 @@ color: white;
                 <button hidden id="show-images">الصور</button>
                 <button hidden id="show-videos">الفيديوهات</button>
             </div>
-
             <div class="content" id="articles">
-            <h2>قسم المقالات</h2>
-            <div class="container">
-            <div id="articleContainer"></div>
+                <h2>قسم المقالات</h2>
+                <div id="articleContainer"></div>
             </div>
-            </div>
-            
             <div class="content" id="qa">
                 <h2>قسم الأسئلة والأجوبة</h2>
                 <p>محتوى الأسئلة والأجوبة هنا</p>
@@ -398,39 +369,23 @@ color: white;
             </div>
         </div>
     </div>
-
-        </div>
-    </div>
-
-<div class="contact-section">
+    <div class="contact-section">
         <form id="contactForm" class="contact-form">
             <h2>اطرح سؤالاً</h2>
-            
             <div class="form-group">
                 <label for="name">الاسم الكامل:</label>
                 <input type="text" id="name" name="name" required>
             </div>
-            
             <div class="form-group">
                 <label for="title">البريد الالكتروني:</label>
                 <input type="text" id="title" name="title" required>
             </div>
-            
             <div class="form-group">
                 <label for="message"> نص السؤال :</label>
                 <textarea id="message" name="message" required></textarea>
             </div>
-            
-       <!-- <div class="form-group">
-               <label for="image">إرفاق صورة (اختياري):
-</label>
-                <input type="file" id="image" name="image" accept="image/*">
-          </div> -->
-            
             <button type="submit" class="button">إرسال الرسالة</button>
-            
         </form>
-
     </div>
 </body>
 </html>
