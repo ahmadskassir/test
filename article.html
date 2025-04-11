@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Tajawal&display=swap" rel="stylesheet">
-    <title>تفاصيل المقالة</title>
+    <title>أسرار آل محمد ع</title>
     <style>
         body {
             margin: 0;
@@ -102,7 +102,7 @@
                     const article = docSnap.data();
                     articleContainer.innerHTML = `
                         <h2 class="article-title">${article.title}</h2>
-                        <p class="article-author">بواسطة: ${article.authour}</p>
+                        <p class="article-author"> ${article.authour}</p>
                         <p class="article-excerpt">${article.ex}</p>
                         <div class="article-content">${article.text || 'لا يوجد محتوى إضافي'}</div>
                         <a href="index.html" class="back-button">العودة إلى الرئيسية</a>
