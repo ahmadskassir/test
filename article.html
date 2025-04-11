@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Tajawal&display=swap" rel="stylesheet">
+    <title>تفاصيل المقالة</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Tajawal, sans-serif;
+            direction: rtl;
+            background-color: #f5f5f5;
+        }
+        .header {
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #00ab81;
+            border-bottom: 2px solid #007e5f;
+            color: white;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border: 1px solid #007e5f;
+            border-radius: 5px;
+        }
+        .article-title {
+            color: #007e5f;
+            margin-bottom: 10px;
+        }
+        .article-author {
+            color: #555;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        .article-excerpt {
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .article-content {
+            line-height: 1.6;
+            color: #333;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007e5f;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background: #005742;
+        }
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA_8I3TTKFl-5KYnhk4K_OrzqzzymzmhqU",
+            authDomain: "test-test-313.firebaseapp.com",
+            projectId: "test-test-313",
+            storageBucket: "test-test-313.appspot.com",
+            messagingSenderId: "926344113742",
+            appId: "1:926344113742:web:1ace941af9bd92eebedd1f",
+            measurementId: "G-NCC8S9Z7NX"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            const articleContainer = document.getElementById('articleDetails');
+            
+            if (!articleId) {
+                articleContainer.innerHTML = '<p>لم يتم العثور على المقالة</p>';
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "article", articleId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const article = docSnap.data();
+                    articleContainer.innerHTML = `
+                        <h2 class="article-title">${article.title}</h2>
+                        <p class="article-author">بواسطة: ${article.authour}</p>
+                        <p class="article-excerpt">${article.ex}</p>
+                        <div class="article-content">${article.content || 'لا يوجد محتوى إضافي'}</div>
+                        <a href="index.html" class="back-button">العودة إلى الرئيسية</a>
+                    `;
+                } else {
+                    articleContainer.innerHTML = '<p>لم يتم العثور على المقالة</p>';
+                }
+            } catch (error) {
+                console.error("Error loading article:", error);
+                articleContainer.innerHTML = '<p>حدث خطأ أثناء تحميل المقالة</p>';
+            }
+        }
+
+        window.onload = loadArticle;
+    </script>
+</head>
+<body>
+    <header class="header">
+        <h1>اسرار آل محمد عليهم السلام</h1>
+    </header>
+    <div class="article-container" id="articleDetails">
+        <p>جار التحميل...</p>
+    </div>
+</body>
+</html>
