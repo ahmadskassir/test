@@ -1,1139 +1,433 @@
+
+
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع العلمي الشيعي</title>
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    
-
-<style>
-
-#header01 {
-    display: block;
-    position: fixed;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 0px 0px 20px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 20px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 1351px;
-    height: 32px;
-    min-width: 0px;
-    min-height: 32px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgb(147, 124, 72) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(147, 124, 72);
-    border-width: 0px 0px 1px;
-    border-style: solid;
-    border-color: rgb(147, 124, 72);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    z-index: 1030;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}img {
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 97.7031px;
-    height: 25px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: start;
-    vertical-align: middle;
-    color: rgb(51, 51, 51);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: clip;
-    text-decoration: none solid rgb(51, 51, 51);
-}a {
-    display: block;
-    position: relative;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding: 5px 15px 0px;
-    padding-top: 5px;
-    padding-right: 15px;
-    padding-bottom: 0px;
-    padding-left: 15px;
-    width: 70px;
-    height: 30px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: "Noto Kufi Arabic", serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: right;
-    vertical-align: baseline;
-    color: rgb(255, 255, 255);
-    background: rgb(97, 116, 53) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(97, 116, 53);
-    border: 0px none rgb(255, 255, 255);
-    border-width: 0px;
-    border-color: rgb(255, 255, 255);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(255, 255, 255);
-}.dropdown-toggle {
-    display: block;
-    position: relative;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding: 5px 15px 0px;
-    padding-top: 5px;
-    padding-right: 15px;
-    padding-bottom: 0px;
-    padding-left: 15px;
-    width: 105.109px;
-    height: 30px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: "Noto Kufi Arabic", serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: right;
-    vertical-align: baseline;
-    color: rgb(255, 255, 255);
-    background: rgb(97, 116, 53) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(97, 116, 53);
-    border: 0px none rgb(255, 255, 255);
-    border-width: 0px;
-    border-color: rgb(255, 255, 255);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(255, 255, 255);
-}input {
-    display: inline-block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 3px 0px 0px;
-    margin-top: 3px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding: 2px;
-    padding-top: 2px;
-    padding-right: 2px;
-    padding-bottom: 2px;
-    padding-left: 2px;
-    width: 95px;
-    height: 25px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 17.1429px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(255, 255, 255);
-    border: 2px inset rgb(118, 118, 118);
-    border-width: 2px;
-    border-style: inset;
-    border-color: rgb(118, 118, 118);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: clip;
-    text-decoration: none solid rgb(51, 51, 51);
-}.glyphicon {
-    display: inline-block;
-    position: relative;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 20px;
-    height: 20px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: "Glyphicons Halflings";
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 20px;
-    text-align: right;
-    vertical-align: baseline;
-    color: rgb(255, 255, 255);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(255, 255, 255);
-    border-width: 0px;
-    border-color: rgb(255, 255, 255);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(255, 255, 255);
-}.row {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 0px -15px;
-    margin-top: 0px;
-    margin-right: -15px;
-    margin-bottom: 0px;
-    margin-left: -15px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 1170px;
-    height: 98.0781px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: "Noto Kufi Arabic Bold", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: center;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}p {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 0px 0px 15px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 15px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 200px;
-    height: 19px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: ge_l;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: baseline;
-    color: #97bc62;
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(91, 90, 90);
-    border-width: 0px;
-    border-color: rgb(91, 90, 90);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(91, 90, 90);
-}.caption {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding: 9px;
-    padding-top: 9px;
-    padding-right: 9px;
-    padding-bottom: 9px;
-    padding-left: 9px;
-    width: 111.25px;
-    height: 52px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: "Noto Kufi Arabic Bold", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: center;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}.top_pagination {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 6px 0px -1px;
-    margin-top: 6px;
-    margin-right: 0px;
-    margin-bottom: -1px;
-    margin-left: 0px;
-    padding: 7px 11px 8px 8px;
-    padding-top: 7px;
-    padding-right: 11px;
-    padding-bottom: 8px;
-    padding-left: 8px;
-    width: 1351px;
-    height: 32px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: ge_m;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: center;
-    vertical-align: middle;
-    color: rgb(51, 51, 51);
-    background: rgb(243, 238, 228) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(243, 238, 228);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}#jumbotron01 {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 31px 0px 7px;
-    margin-top: 31px;
-    margin-right: 0px;
-    margin-bottom: 7px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 1351px;
-    height: 135.078px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: "Noto Kufi Arabic Bold", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: center;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(255, 255, 255);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}.sidebar_first_title {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 6px 0px -1px;
-    margin-top: 6px;
-    margin-right: 0px;
-    margin-bottom: -1px;
-    margin-left: 0px;
-    padding: 7px 11px 0px 0px;
-    padding-top: 7px;
-    padding-right: 11px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 750px;
-    height: 32px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: ge_m;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: start;
-    vertical-align: middle;
-    color: rgb(255, 255, 255);
-    background: rgb(177, 193, 122) url("https://www.alqatrah.net/alqatrah_style/bg_title.png") no-repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(177, 193, 122);
-    background-image: url("https://www.alqatrah.net/alqatrah_style/bg_title.png");
-    border: 0px none rgb(255, 255, 255);
-    border-width: 0px;
-    border-color: rgb(255, 255, 255);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(255, 255, 255);
-}body {
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgb(226, 214, 188) url("https://i.postimg.cc/WtRzBjRZ/IMG-2025.png") repeat scroll 0px 0px / auto padding-box border-box;
-    background-color: rgb(226, 214, 188);
-    background-image: url("https://i.postimg.cc/WtRzBjRZ/IMG-2025.png");
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}.col-md-12 {
-    display: block;
-    position: relative;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding: 0px 15px;
-    padding-top: 0px;
-    padding-right: 15px;
-    padding-bottom: 0px;
-    padding-left: 15px;
-    width: 746px;
-    height: 528.031px;
-    min-width: 0px;
-    min-height: 1px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}h1 {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 20px 0px 10px;
-    margin-top: 20px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 716px;
-    height: 40px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: ge_m, "arabic typesetting", serif;
-    font-size: 28px;
-    font-weight: 500;
-    line-height: 30.8px;
-    text-align: start;
-    vertical-align: baseline;
-    color: #97bc62;
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(97, 116, 53);
-    border-width: 0px;
-    border-color: rgb(97, 116, 53);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(97, 116, 53);
-}.row {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 1px 1px 8px;
-    margin-top: 1px;
-    margin-right: 1px;
-    margin-bottom: 8px;
-    margin-left: 1px;
-    padding: 15px 1px;
-    padding-top: 15px;
-    padding-right: 1px;
-    padding-bottom: 15px;
-    padding-left: 1px;
-    width: 1138px;
-    height: 334.734px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgb(147, 124, 72) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(147, 124, 72);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}.img-responsive {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 254px;
-    height: 158.062px;
-    max-width: 100%;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: start;
-    vertical-align: middle;
-    color: rgb(97, 116, 53);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(97, 116, 53);
-    border-width: 0px;
-    border-color: rgb(97, 116, 53);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: clip;
-    text-decoration: none solid rgb(97, 116, 53);
-}span {
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, serif;
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 14.2857px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(238, 233, 221);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(238, 233, 221);
-    border-width: 0px;
-    border-color: rgb(238, 233, 221);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(238, 233, 221);
-}.time {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 0px 0px 10px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 348.656px;
-    height: 14.2812px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, serif;
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 14.2857px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(153, 153, 153);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(153, 153, 153);
-    border-width: 0px;
-    border-color: rgb(153, 153, 153);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(153, 153, 153);
-}.meta {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 0px 0px 10px;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 348.656px;
-    height: 14.2812px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 14.2857px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}div {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 10px 0px 0px;
-    margin-top: 10px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 1351px;
-    height: 310.844px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgb(147, 124, 72) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgb(147, 124, 72);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}.col-sm-12 {
-    display: block;
-    position: relative;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    padding: 0px 15px;
-    padding-top: 0px;
-    padding-right: 15px;
-    padding-bottom: 0px;
-    padding-left: 15px;
-    width: 1136px;
-    height: 60.7969px;
-    min-width: 0px;
-    min-height: 1px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28.5714px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(51, 51, 51);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(51, 51, 51);
-    border-width: 0px;
-    border-color: rgb(51, 51, 51);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(51, 51, 51);
-}.footer_header {
-    display: block;
-    position: static;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 0;
-    flex-shrink: 1;
-    grid: none / none / none / row / auto / auto;
-    margin: 20px 0px 10px;
-    margin-top: 20px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-    margin-left: 0px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 165px;
-    height: 19.7969px;
-    min-width: 0px;
-    min-height: 0px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 19.8px;
-    text-align: start;
-    vertical-align: baseline;
-    color: rgb(255, 255, 255);
-    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0px none rgb(255, 255, 255);
-    border-width: 0px;
-    border-color: rgb(255, 255, 255);
-    border-radius: 0px;
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(255, 255, 255);
-}.copyright {
-    display: block;
-    position: relative;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-shrink: 1;
-    margin: 0px 0px 10px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    width: 945px;
-    height: 24.2812px;
-    font-family: Greta, "arabic typesetting", serif;
-    font-size: 10px;
-    font-weight: 400;
-    line-height: 14.2857px;
-    text-align: left;
-    vertical-align: baseline;
-    color: rgb(255, 255, 255);
-    border: 0px none rgb(255, 255, 255);
-    border-color: rgb(255, 255, 255);
-    opacity: 1;
-    transition: all;
-    overflow: visible;
-    text-decoration: none solid rgb(255, 255, 255);
-}
-
-    /* أنماط التصميم */
-    :root {
-        --primary-color: #2c5f2d; /* أخضر داكن */
-        --secondary-color: #97bc62; /* أخضر فاتح */
-        --background: #f4f4f4;
-        --text-color: #333;
-    }
-
-    * {
-        box-sizing: border-box;
-        font-family: 'Arial', sans-serif;
-    }
-
+    <title>gaza under attack</title>
+    <style>
     body {
         margin: 0;
-        padding: 0;
-        background-color: var(--background);
-        color: var(--text-color);
+        font-family: Arial, sans-serif;
+        direction: rtl;
     }
-
-    .header {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 0.5rem;
-        text-align: center;
+    .header { 
+        font-size:15px; 
+        display: flex; 
+        align-items: center; 
+        padding: 15px;
+        background: #00ab81; 
+        border-bottom: 2px solid #007e5f; 
+        color: white; 
+    } 
+    .title { 
+        color:white;
+        margin: 0;
+        font-size: 1.2em;
     }
-
-    .nav {
+    .container {
+        height: 100vh;
         display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 0.25rem;
-        background-color: var(--secondary-color);
+        flex-direction: row;
     }
 
-    .nav a {
-        color: white;
-        text-decoration: none;
+    .sidebar {
+        width: 200px;
+        background-color: #f0f0f0;
+        overflow: hidden;
+        position: relative;
+        flex-shrink: 0;
     }
 
-    .section {
-        max-width: 1200px;
+    .text-container {
+        position: absolute;
+        top: 0;
+        width: 200px;
+        animation: scroll-text 29s linear infinite;
     }
 
-    .hadith-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1rem;
+    .text-container p {
+        margin: 0;
+        padding: 10px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
-    .hadith-card {
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    @keyframes scroll-text {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); }
     }
 
-    form {
+    .main-content {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .buttons {
+        margin-bottom: 20px;
         display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    input, textarea {
-        padding: 0.5rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+        gap: 10px;
     }
 
     button {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 4px;
+        padding: 10px 20px;
         cursor: pointer;
-    }
-
-    footer {
-        background-color: var(--primary-color);
+        background-color: #007e5f;
         color: white;
-        text-align: center;
-        padding: 2rem;
+        border: none;
+        border-radius: 5px;
+        flex: 1;
     }
-</style>
 
+    button:hover {
+        background-color: #005742;
+    }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.25rem;
+            background-color: #acb200;
+color: white;
+        }
+
+        .nav a {
+            
+            color: white;
+            text-decoration: none;
+        }
+    .content {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    #photoContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+    }
+
+    video {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        max-height: 250px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+            height: auto;
+        }
+        
+        .sidebar {
+            width: 100%;
+            height: 200px;
+            flex-shrink: 0;
+        }
+        
+        .text-container {
+            width: 100%;
+        }
+        
+        .main-content {
+            padding: 15px;
+            overflow: visible;
+        }
+        
+        .buttons {
+            flex-direction: column;
+        }'
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.25rem;
+color: white;
+            background-color: #acb200;
+ 
+        }
+
+        .nav a {
+            
+            color: white;
+            text-decoration: none;
+        }
+        button {
+            width: 100%;
+            margin: 5px 0;
+        }
+        
+        #photoContainer {
+            grid-template-columns: 1fr;
+        }
+        
+        .header {
+            padding: 10px;
+        }
+        
+        .title {
+            font-size: 1em;
+        }
+    }
+   .contact-section {
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-top: 2px solid #007e5f;;
+        direction: rtl;
+    }
+    
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group file {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    .form-group textarea {
+        height: 100px;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-section {
+            padding: 15px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            font-size: 14px;
+        }
+    }
+    </style>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA_8I3TTKFl-5KYnhk4K_OrzqzzymzmhqU",
+            authDomain: "test-test-313.firebaseapp.com",
+            projectId: "test-test-313",
+            storageBucket: "test-test-313.appspot.com",
+            messagingSenderId: "926344113742",
+            appId: "1:926344113742:web:1ace941af9bd92eebedd1f",
+            measurementId: "G-NCC8S9Z7NX"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadTexts() {
+            const textContainer = document.getElementById("textContainer");
+            textContainer.innerHTML = '<p>جار التحميل...</p>';
+            
+            const querySnapshot = await getDocs(collection(db, "texts"));
+            let textHTML = '';
+            
+            querySnapshot.forEach((doc) => {
+                const textData = doc.data();
+                textHTML += `<p class="txt">${textData.text}</p><br>`;
+            });
+
+            textContainer.innerHTML = textHTML + textHTML || '<p>لم يتم العثور على نصوص</p>';
+        }
+
+        async function loadSpecialties() {
+            const photoContainer = document.getElementById("photoContainer");
+            photoContainer.innerHTML = '<p>جار التحميل...</p>';
+            
+            const querySnapshot = await getDocs(collection(db, "image"));
+            let photoHTML = '';
+            
+            querySnapshot.forEach((doc) => {
+                const photo = doc.data();
+                photoHTML += `
+                    <div 
+                        data-id="${doc.id}"
+                        data-name="${photo.title}"
+                        data-image="${photo.source}">
+                        <img src="${photo.source}" alt="${photo.title}">
+                        <p>${photo.title}</p>
+                    </div>
+                `;
+            });
+
+            photoContainer.innerHTML = photoHTML || '<p>لم يتم العثور على صور</p>';
+        }
+
+
+        async function loadvideos() {
+            const videoContainer = document.getElementById("videoContainer");
+            videoContainer.innerHTML = '<p>جار التحميل...</p>';
+            
+            const querySnapshot = await getDocs(collection(db, "video"));
+            let videoHTML = '';
+            
+            querySnapshot.forEach((doc) => {
+                const video = doc.data();
+                videoHTML += `
+                    <div 
+                        data-id="${doc.id}"
+                        data-name="${video.title}"
+                        data-image="${video.source}">
+                        <video controls>
+                            <source src="${video.source}" type="video/mp4">
+                        </video>
+                        <p>${video.title}</p>
+                    </div>
+                `;
+            });
+
+            videoContainer.innerHTML = videoHTML || '<p>لم يتم العثور على صور</p>';
+        }
+
+        document.getElementById('show-images').addEventListener('click', function() {
+            document.getElementById('images').style.display = 'block';
+            document.getElementById('videos').style.display = 'none';
+        });
+
+        document.getElementById('show-videos').addEventListener('click', function() {
+            document.getElementById('images').style.display = 'none';
+            document.getElementById('videos').style.display = 'block';
+        });
+
+        window.onload = function() {
+            loadTexts();
+            loadSpecialties();
+            loadvideos();
+        };
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('https://formspree.io/f/xdkepole', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('تم إرسال الرسالة بنجاح!');
+                    this.reset();
+                } else {
+                    alert('حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقًا.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقًا.');
+            });
+        });
+    </script>
 </head>
+
 <body>
     <header class="header">
-        <h2>اسرار آل محمد "ع"</h2>
-        <h4>بوابة التواصل بين الحوزة العلمية والمجتمع</h4>
+        <h1>اسرار آل محمد عليهم السلام</h1>
+        <p>&nbsp; &nbsp;بوابة التواصل بين الحوزة العلمية والمجتمع</p>
     </header>
-<nav class="nav">
-    <a href="#hadith"> الأحاديث</a>
-    <a href="#content"> المحتوى</a>
-    <a href="#contact"> اتصل بنا </a>
-    <a href="#questions"> الأسئلة</a>
-</nav>
 
-<section class="section" id="hadith">
-    <h2>قصار الأحاديث</h2>
-    <div class="hadith-container" id="hadiths"></div>
-</section>
+    <nav class="nav">
+        <a href="#articles"> المقالات</a>
+       <a href="#qa"> الأسئلة</a>
+        <a href="#hadith"> الأحاديث</a>
+        <a href="#doaa"> الادعية </a>
+ 
+    </nav>
 
-<section class="section" id="content">
-    <h2>أقسام المحتوى</h2>
-    <div id="contentCategories"></div>
-</section>
+   <div class="container">
+        <div class="sidebar">
+            <div class="text-container" id="textContainer"></div>
+        </div>
+        <div class="main-content">
+            <div class="buttons">
+                <button hidden id="show-images">الصور</button>
+                <button hidden id="show-videos">الفيديوهات</button>
+            </div>
 
-<section class="section" id="contact">
-    <h2>اتصل بنا</h2>
-    <form id="contactForm">
-        <input type="text" placeholder="الاسم" required>
-        <input type="email" placeholder="البريد الإلكتروني" required>
-        <textarea rows="5" placeholder="الرسالة" required></textarea>
-        <button type="submit">إرسال</button>
-    </form>
-</section>
+            <div class="content" id="articles">
+                <h2>قسم المقالات</h2>
+                <p>محتوى المقالات هنا</p>
+            </div>
+            <div class="content" id="qa">
+                <h2>قسم الأسئلة والأجوبة</h2>
+                <p>محتوى الأسئلة والأجوبة هنا</p>
+            </div>
+            <div class="content" id="hadith">
+                <h2>قسم الحديث</h2>
+                <p>محتوى الحديث هنا</p>
+            </div>
+            <div class="content" id="doaa">
+                <h2>قسم الأدعية</h2>
+                <p>محتوى الأدعية هنا</p>
+            </div>
+        </div>
+    </div>
 
-<section class="section" id="questions">
-    <h2>الأسئلة</h2>
-    <form id="questionForm">
-        <textarea rows="3" placeholder="اطرح سؤالك هنا" required></textarea>
-        <button type="submit">إرسال السؤال</button>
-    </form>
-    <div id="questionsList"></div>
-</section>
+        </div>
+    </div>
 
-<footer>
-    <p>© 2025 جميع الحقوق محفوظة موقع اسرار ال محمد "ع"</p>
-</footer>
+<div class="contact-section">
+        <form id="contactForm" class="contact-form">
+            <h2>اطرح سؤالاً</h2>
+            
+            <div class="form-group">
+                <label for="name">الاسم الكامل:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="title">البريد الالكتروني:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message"> نص السؤال :</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            
+       <!-- <div class="form-group">
+               <label for="image">إرفاق صورة (اختياري):
+</label>
+                <input type="file" id="image" name="image" accept="image/*">
+          </div> -->
+            
+            <button type="submit" class="button">إرسال الرسالة</button>
+            
+        </form>
 
-<script>
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_AUTH_DOMAIN",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_STORAGE_BUCKET",
-        messagingSenderId: "YOUR_SENDER_ID",
-        appId: "YOUR_APP_ID"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const auth = firebase.auth();
-
-    // Fetch Hadiths
-    function loadHadiths() {
-        db.collection("hadiths").limit(10).get().then((querySnapshot) => {
-            const container = document.getElementById('hadiths');
-            querySnapshot.forEach((doc) => {
-                const hadith = doc.data();
-                const card = document.createElement('div');
-                card.className = 'hadith-card';
-                card.innerHTML = `
-                    <p>${hadith.text}</p>
-                    <small>${hadith.source}</small>
-                `;
-                container.appendChild(card);
-            });
-        });
-    }
-
-    // Load Content Categories
-    function loadContentCategories() {
-        db.collection("categories").get().then((querySnapshot) => {
-            const container = document.getElementById('contentCategories');
-            querySnapshot.forEach((doc) => {
-                const category = doc.data();
-                const section = document.createElement('div');
-                section.className = 'category-section';
-                section.innerHTML = `
-                    <h3>${category.name}</h3>
-                    <p>${category.description}</p>
-                `;
-                container.appendChild(section);
-            });
-        });
-    }
-
-    // Contact Form Handler
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = {
-            name: e.target[0].value,
-            email: e.target[1].value,
-            message: e.target[2].value,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        };
-        
-        db.collection("messages").add(formData)
-            .then(() => alert('تم إرسال الرسالة بنجاح'))
-            .catch(error => console.error('Error sending message:', error));
-    });
-
-    // Questions Handler
-    document.getElementById('questionForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const question = {
-            text: e.target[0].value,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            status: 'pending'
-        };
-        
-        db.collection("questions").add(question)
-            .then(() => alert('تم إرسال السؤال بنجاح'))
-            .catch(error => console.error('Error submitting question:', error));
-    });
-
-    // Initial Load
-    window.onload = () => {
-        loadHadiths();
-        loadContentCategories();
-    };
-</script>
-
+    </div>
 </body>
 </html>
-
